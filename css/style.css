@@ -1,0 +1,28 @@
+body,
+html {
+  margin: 0;
+  background-color: #8dc0dd; }
+
+.global-container #field {
+  margin: 30px;
+  background: #0c2674;
+  border: 5px solid white;
+  height: 505px;
+  width: 486px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  .global-container #field .minecell {
+    margin: 3px;
+    background: #edf1ec;
+    border: 1px solid white;
+    height: 10px;
+    width: 10px; }
+
+/*# sourceMappingURL=style.css.map */
