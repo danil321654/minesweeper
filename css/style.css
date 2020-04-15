@@ -7,8 +7,8 @@ html {
   margin: 30px;
   background: #0c2674;
   border: 5px solid white;
-  height: 505px;
-  width: 486px;
+  height: 504px;
+  width: 504px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,10 +19,19 @@ html {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
   .global-container #field .minecell {
-    margin: 3px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    margin: 2px;
     background: #edf1ec;
     border: 1px solid white;
-    height: 10px;
-    width: 10px; }
+    height: 14px;
+    width: 14px;
+    color: white;
+    text-align: center;
+    font: 11px bold; }
+    .global-container #field .minecell .red {
+      background: red !important; }
+    .global-container #field .minecell .blue {
+      background: blue !important; }
 
 /*# sourceMappingURL=style.css.map */
