@@ -1,13 +1,17 @@
+document.oncontextmenu = function() {
+  return false;
+};
 let mines = [];
 let minesNum = [];
 let clicks = 0;
+let time = 0;
 let n = 784;
+let kn = 28;
 let m = 120;
 const fillCells = event => {
   for (let i = 0; i < m; i++) {
     let rand = Math.round(0 - 0.5 + Math.random() * n);
     let curId = +event.target.id;
-    console.log(curId);
     while (
       minesNum.indexOf(rand) != -1 ||
       (rand >= curId - 29 && rand <= curId - 27) ||
@@ -17,7 +21,6 @@ const fillCells = event => {
       rand = Math.round(0 - 0.5 + Math.random() * n);
     minesNum[i] = rand;
   }
-  console.log(minesNum);
   for (let i = 0; i < m; i++) {
     mines[minesNum[i]].numOfMines = -1;
   }
@@ -46,20 +49,44 @@ const fillCells = event => {
     }
   }
 };
-const mineReducer = event => {
-  if (clicks == 0) fillCells(event);
-  if (event.isTrusted) clicks = clicks + 1;
+const flagger = event => {
   let curId = +event.target.id;
-  console.log(event);
+  if (!mines[curId].checked) {
+    mines[curId].flagged = !mines[curId].flagged;
+    if (mines[curId].flagged) event.target.style.background = "green";
+    else event.target.style.background = "white";
+  }
+};
+const mineReducer = event => {
+  if (clicks == 0) {
+    fillCells(event);
+    setInterval(()=>{document.getElementById("time").innerHTML =
+      (Math.round(time*100)/100).toString() + "s";time += 0.1;}, 100);
+  }
+  let curId = +event.target.id;
+  if (event.isTrusted && !mines[curId].checked) {
+    clicks = clicks + 1;
+    document.getElementById("clicksCounter").innerHTML =
+      "Clicks: " + clicks.toString();
+  }
   switch (mines[curId].numOfMines) {
     case -1:
-      console.log("end");
+      for (let i = 0; i < n; i++) {
+        document
+          .getElementById(mines[i].num.toString())
+          .removeEventListener("click", mineReducer);
+        document
+          .getElementById(mines[i].num.toString())
+          .removeEventListener("contextmenu", flagger);
+      }
+      for (let i = 0; i < m; i++)
+        document.getElementById(minesNum[i].toString()).style.background =
+          "red";
       break;
     case 0:
       if (!mines[curId].checked) {
         event.target.style.background = "lightblue";
-
-                mines[curId].checked = true;
+        mines[curId].checked = true;
         if (curId % 28 != 27) {
           document
             .getElementById((curId + 1).toString())
@@ -110,15 +137,17 @@ const showfield = () => {
     let minecell = document.createElement("div");
     minecell.className = "minecell";
     minecell.id = i.toString();
-    mines[i] = {num: i, numOfMines: "", checked: false};
+    mines[i] = {num: i, numOfMines: "", checked: false, flagged: false};
     console.log(mines[i]);
     document.getElementById("field").appendChild(minecell);
   }
-  console.log("Added");
-
-  for (let i = 0; i < n; i++)
+  for (let i = 0; i < n; i++) {
     document
       .getElementById(mines[i].num.toString())
       .addEventListener("click", mineReducer, false);
+    document
+      .getElementById(mines[i].num.toString())
+      .addEventListener("contextmenu", flagger, false);
+  }
 };
 document.addEventListener("DOMContentLoaded", showfield);
