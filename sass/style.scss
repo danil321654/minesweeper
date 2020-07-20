@@ -41,25 +41,19 @@ html {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    border-radius: 2%;
 
     .minecell {
       box-sizing: border-box;
       margin: 2px;
       background: rgb(237, 241, 236);
       border: 1px solid white;
+      border-radius: 20%;
       height: 14px;
       width: 14px;
       color: white;
       text-align: center;
       font: 11px bold;
-
-      .red {
-        background: red !important;
-      }
-
-      .blue {
-        background: blue !important;
-      }
     }
   }
 

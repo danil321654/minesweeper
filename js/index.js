@@ -1,6 +1,7 @@
 document.oncontextmenu = function() {
   return false;
 };
+let newTimer;
 let mines = [];
 let minesNum = [];
 let clicks = 0;
@@ -57,11 +58,15 @@ const flagger = event => {
     else event.target.style.background = "white";
   }
 };
+const timer = () => {
+  document.getElementById("time").innerHTML =
+    (Math.round(time * 100) / 100).toString() + "s";
+  time += 0.1;
+};
 const mineReducer = event => {
   if (clicks == 0) {
     fillCells(event);
-    setInterval(()=>{document.getElementById("time").innerHTML =
-      (Math.round(time*100)/100).toString() + "s";time += 0.1;}, 100);
+    newTimer = setInterval(timer, 100);
   }
   let curId = +event.target.id;
   if (event.isTrusted && !mines[curId].checked) {
@@ -82,6 +87,7 @@ const mineReducer = event => {
       for (let i = 0; i < m; i++)
         document.getElementById(minesNum[i].toString()).style.background =
           "red";
+      clearTimeout(newTimer);
       break;
     case 0:
       if (!mines[curId].checked) {

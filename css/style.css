@@ -59,21 +59,19 @@ html {
         -ms-flex-direction: row;
             flex-direction: row;
     -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
+        flex-wrap: wrap;
+    border-radius: 2%; }
     .global-container #field .minecell {
       -webkit-box-sizing: border-box;
               box-sizing: border-box;
       margin: 2px;
       background: #edf1ec;
       border: 1px solid white;
+      border-radius: 20%;
       height: 14px;
       width: 14px;
       color: white;
       text-align: center;
       font: 11px bold; }
-      .global-container #field .minecell .red {
-        background: red !important; }
-      .global-container #field .minecell .blue {
-        background: blue !important; }
 
 /*# sourceMappingURL=style.css.map */
