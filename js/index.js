@@ -105,7 +105,6 @@ const mineReducer = event => {
             document
               .getElementById((curId + 29).toString())
               .dispatchEvent(new Event("click"));
-          mines[curId].checked = true;
         }
         if (curId % 28 != 0) {
           document
@@ -128,6 +127,7 @@ const mineReducer = event => {
           document
             .getElementById((curId + 28).toString())
             .dispatchEvent(new Event("click"));
+        mines[curId].checked = true;
       }
       break;
     default:
